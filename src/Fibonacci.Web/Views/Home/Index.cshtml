@@ -11,7 +11,7 @@
             take noticeably longer lengths of time. 20 terms should be calculable in
             around 2.5s.
         </p>
-        <form method="PUT" action="@Url.Action("Calculate")" class="form-inline" id="calculator">
+        <form method="PUT" action="@Url.Action("Calculate", "Fibonacci",  new { numberOfTerms = "{numberOfTerms}"})" class="form-inline" id="calculator">
             <div class="form-group">
                 <label for="terms">Number of terms</label>
                 <input type="text" id="terms" class="form-control" />
@@ -22,22 +22,49 @@
                 </button>
             </div>
         </form>
-        <p id="series"></p>
+        <div id="series">
+            <img src="@Url.Content("images/ajax-loader.gif")" style="display: none;" id="spinner" />
+            <p></p>
+        </div>
     </div>
 </div>
 
 @section Scripts {
     <script type="text/javascript">
+        var form = document.querySelector("#calculator");
         function calculate(event) {
             console.log("FIRED!");
             event.preventDefault();
-            let numberOfTerms = document.getElementById("terms").value;
-            let terms = numberOfTerms;
+            let numberOfTerms = document.querySelector("#terms").value;
 
-            document.getElementById("series").innerHTML = terms;
+            let results = document.querySelector("#series p");
+            let spinner = document.querySelector("#spinner");
+            spinner.style = "display: visible;";
+            results.style = "display: none;"
+
+            let url = decodeURI(form.action).replace("{numberOfTerms}", numberOfTerms);
+            let method = form.getAttribute("method");
+            fetch(url, {
+                method: method
+            }).then(function(response) {
+                spinner.style = "display: none;";
+                results.style = "display: visible;";
+                
+                if (response.ok) {
+                    return response.text();
+                } else {
+                    return `${response.status} ${response.statusText}`;
+                }
+            }).then(function(body){
+                results.textContent = body;
+            }).catch(function(error) {
+                spinner.style = "display: none;";
+                results.style = "display: visible;";
+                results.textContent = error.message;
+            });
 
             return false;
         }
-        document.getElementById("calculator").onsubmit = calculate;
+        form.onsubmit = calculate;
     </script>
 }
