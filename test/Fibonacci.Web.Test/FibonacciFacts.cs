@@ -23,12 +23,13 @@ namespace Fibonacci.Web.Test
             Assert.Equal(new[] { 0, 1 }, result.ToArray());
         }
 
-        [Fact]
-        public void Third_Term_Is_One()
+        [Theory]
+        [InlineData(3, 1)]
+        public void Later_Terms_Are_The_Sum_Of_The_Two_Previous_Terms(int term, int expected)
         {
             var sut = new FibonacciCalculator();
-            var result = sut.Calculate(3);
-            Assert.Equal(new[] { 0, 1, 1 }, result.ToArray());
+            var result = sut.Calculate(term).ToArray();
+            Assert.Equal(expected, result[term - 1]);
         }
     }
 }
