@@ -14,3 +14,15 @@ dotnet build
 dotnet test .\test\Fibonacci.Web.Test\Fibonacci.Web.Test.csproj
 edit .
 ```
+
+# Testing Fibonacci
+
+```csharp
+[Fact]
+public void First_Term_Is_Zero()
+{
+    var sut = new FibonacciCalculator();
+    var result = sut.Calculate(1);
+    Assert.Equal(new[] { 0 }, result.ToArray());
+}
+```
