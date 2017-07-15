@@ -65,3 +65,28 @@ public void Later_Terms_Are_The_Sum_Of_The_Two_Previous_Terms(int term, int expe
 [InlineData(8, 13)]
 [InlineData(9, 21)]
 ```
+# Dockerise
+## Dockerfile
+```dockerfile
+FROM microsoft/aspnetcore:1.1
+WORKDIR /app
+
+COPY bin/Release/netcoreapp1.1/publish/ ./
+
+EXPOSE 80
+
+ENTRYPOINT ["dotnet", "Fibonacci.Web.dll"]
+```
+## Building
+```powershell
+cd src/Fibonacci.Web
+dotnet publish -c Release
+docker build -t fibonacci:latest .
+```
+## Running
+```powershell
+docker run -p 80:80 --name fibonacci fibonacci:latest
+docker rm -f fibonnaci
+# Turn up log level
+docker run -p 80:80 -e Logging__LogLevel__Default=Information --name fibonacci fibonacci:latest
+```
