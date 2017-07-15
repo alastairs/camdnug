@@ -1,0 +1,23 @@
+{
+    "version": "0.1.0",
+    "command": "dotnet",
+    "isShellCommand": true,
+    "args": [],
+    "tasks": [{
+            "taskName": "build",
+            "args": [
+                "${workspaceRoot}/src/Fibonacci.Web/Fibonacci.Web.csproj"
+            ],
+            "isBuildCommand": true,
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "taskName": "test",
+            "args": [
+                "${workspaceRoot}/test/Fibonacci.Web.Test/Fibonacci.Web.Test.csproj"
+            ],
+            "isTestCommand": true,
+            "problemMatcher": "$msCompile"
+        }
+    ]
+}
