@@ -22,5 +22,13 @@ namespace Fibonacci.Web.Test
             var result = sut.Calculate(2);
             Assert.Equal(new[] { 0, 1 }, result.ToArray());
         }
+
+        [Fact]
+        public void Third_Term_Is_One()
+        {
+            var sut = new FibonacciCalculator();
+            var result = sut.Calculate(3);
+            Assert.Equal(new[] { 0, 1, 1 }, result.ToArray());
+        }
     }
 }
