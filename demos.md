@@ -16,7 +16,7 @@ edit .
 ```
 
 # Testing Fibonacci
-
+## First test
 ```csharp
 [Fact]
 public void First_Term_Is_Zero()
@@ -24,5 +24,24 @@ public void First_Term_Is_Zero()
     var sut = new FibonacciCalculator();
     var result = sut.Calculate(1);
     Assert.Equal(new[] { 0 }, result.ToArray());
+}
+```
+
+## Next tests
+```csharp
+[Fact]
+public void Second_Term_Is_One()
+{
+    var sut = new FibonacciCalculator();
+    var result = sut.Calculate(2);
+    Assert.Equal(new[] { 0, 1 }, result.ToArray());
+}
+
+[Fact]
+public void Third_Term_Is_One()
+{
+    var sut = new FibonacciCalculator();
+    var result = sut.Calculate(3);
+    Assert.Equal(new[] { 0, 1, 1 }, result.ToArray());
 }
 ```

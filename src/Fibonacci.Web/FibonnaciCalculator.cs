@@ -8,6 +8,9 @@ namespace Fibonacci.Web
         public IEnumerable<int> Calculate(int length)
         {
             yield return 0;
+            if (length == 2) {
+                yield return 1;
+            }
         }
     }
 }
