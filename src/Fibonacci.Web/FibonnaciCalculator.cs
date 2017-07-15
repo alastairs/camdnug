@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Fibonacci.Web
 {
@@ -7,21 +8,26 @@ namespace Fibonacci.Web
     {
         public IEnumerable<int> Calculate(int length)
         {
-            yield return 0;
-            if (length > 1) {
+            if (length == 1)
+            {
+                yield return 0;
+            }
+            else if (length == 2)
+            {
+                yield return 0;
                 yield return 1;
             }
+            else
+            {
+                int remainingTerms = length - 1;
+                foreach (var term in Calculate(remainingTerms))
+                {
+                    yield return term;
+                }
 
-            if (length > 2) {
-                yield return CalculateNext(0, 1);
-            } else {
-                yield break;
+                yield return Calculate(remainingTerms).Last() +
+                    Calculate(remainingTerms - 1).Last();
             }
-        }
-
-        private int CalculateNext(int v1, int v2)
-        {
-            return v1 + v2;
         }
     }
 }

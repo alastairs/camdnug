@@ -25,6 +25,12 @@ namespace Fibonacci.Web.Test
 
         [Theory]
         [InlineData(3, 1)]
+        [InlineData(4, 2)]
+        [InlineData(5, 3)]
+        [InlineData(6, 5)]
+        [InlineData(7, 8)]
+        [InlineData(8, 13)]
+        [InlineData(9, 21)]
         public void Later_Terms_Are_The_Sum_Of_The_Two_Previous_Terms(int term, int expected)
         {
             var sut = new FibonacciCalculator();
