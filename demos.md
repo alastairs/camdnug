@@ -147,6 +147,9 @@ spec:
       containers:
       - image: alastairs/fibonacci:latest
         name: web
+        env:
+        - name: Logging__LogLevel__Default
+          value: Debug
         ports:
         - containerPort: 80
         resources: {}
